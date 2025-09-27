@@ -2,7 +2,6 @@ package com.mxlkn.cupcake.ui
 
 import androidx.lifecycle.ViewModel
 import com.mxlkn.cupcake.data.OrderUiState
-
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -13,10 +12,10 @@ import java.util.Calendar
 import java.util.Locale
 
 /** Price for a single cupcake */
-private const val PRICE_PER_CUPCAKE = 2.00
+private const val PRICE_PER_CUPCAKE = 2000.0
 
 /** Additional cost for same day pickup of an order */
-private const val PRICE_FOR_SAME_DAY_PICKUP = 3.00
+private const val PRICE_FOR_SAME_DAY_PICKUP = 3000.0
 
 class OrderViewModel : ViewModel() {
 
@@ -79,7 +78,9 @@ class OrderViewModel : ViewModel() {
         if (pickupOptions()[0] == pickupDate) {
             calculatedPrice += PRICE_FOR_SAME_DAY_PICKUP
         }
-        val formattedPrice = NumberFormat.getCurrencyInstance().format(calculatedPrice)
+
+        val indonesianLocale = Locale("in", "ID")
+        val formattedPrice = NumberFormat.getCurrencyInstance(indonesianLocale).format(calculatedPrice)
         return formattedPrice
     }
 
